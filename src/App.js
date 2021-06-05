@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom"
 import Home from "./containers/Home"
 import Signin from "./containers/Signin"
 import Signup from "./containers/Signup"
+import * as bs from 'bootstrap/dist/css/bootstrap.css';
 
 /**
 * @author
@@ -14,8 +15,8 @@ const App = (props) => {
     <div>
       <Switch>
         <Route path='/' exact component={Home} />
-        <Route path='/Signin' component={Signin} />
-        <Route path='/Signup' component={Signup} />
+        <Route path='/signin' component={Signin} />
+        <Route path='/signup' component={Signup} />
       </Switch>
     </div>
   )

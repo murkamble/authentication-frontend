@@ -1,4 +1,5 @@
 import React from 'react'
+import Layout from "../../components/Layout"
 
 /**
 * @author
@@ -6,10 +7,10 @@ import React from 'react'
 **/
 
 const Home = (props) => {
-  return(
-    <div>Home</div>
-   )
-  }
+  return (
+    <Layout>Home</Layout>
+  )
+}
 
 
 export default Home
