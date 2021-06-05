@@ -9,8 +9,11 @@ import Header from "../Header"
 const Layout = (props) => {
     return (
         <div>
-            <Header />
-            {props.children}
+            {/* <Header /> */}
+            {/* <div style={{ paddingTop: '60px' }}> */}
+            <div>
+                {props.children}
+            </div>
         </div>
     )
 }
