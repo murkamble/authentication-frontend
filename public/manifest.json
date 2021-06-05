@@ -1,6 +1,6 @@
 {
-  "short_name": "xMedia",
-  "name": "xMedia",
+  "short_name": "Auth",
+  "name": "Auth",
   "icons": [
     {
       "src": "favicon.ico",

@@ -2,6 +2,8 @@ import React from 'react'
 import { Container, Form, Row, Col, Button } from "react-bootstrap"
 import Input from "../../components/UI/Input"
 import { Link } from "react-router-dom"
+import { login } from "../../actions";
+import { useDispatch } from "react-redux";
 
 /**
 * @author
@@ -9,12 +11,23 @@ import { Link } from "react-router-dom"
 **/
 
 const Signin = (props) => {
+
+  const dispatch = useDispatch();
+  const userLogin = (e) => {
+      e.preventDefault()
+      const user = {
+          email: 'mkadmin@ex.com',
+          password: '123456'
+      }
+      dispatch(login(user))
+  }
+
   return (
     <div>
       <Container>
         <Row style={{ marginTop: '50px' }}>
           <Col md={{ span: 6, offset: 3 }}>
-            <Form>
+            <Form onSubmit={userLogin}>
               <div
                 style={{
                   display: 'flex',
