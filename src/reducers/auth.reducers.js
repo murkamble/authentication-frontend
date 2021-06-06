@@ -9,7 +9,10 @@ const initState = {
         picture: '',
     },
     authenticate: false,
-    authenticating: false
+    authenticating: false,
+    loading: false,
+    error: null,
+    message: ''
 }
 
 export default (state = initState, action) => {
@@ -28,7 +31,8 @@ export default (state = initState, action) => {
                 user: action.payload.user,
                 token: action.payload.token,
                 authenticate: true,
-                authenticating: false
+                authenticating: false,
+                error: null,
             }
             break;
         case authConstants.LOGIN_FAILURE:

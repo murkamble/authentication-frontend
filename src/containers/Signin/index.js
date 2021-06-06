@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Form, Row, Col, Button } from "react-bootstrap"
 import Input from "../../components/UI/Input"
 import { Link } from "react-router-dom"
 import { login } from "../../actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 /**
 * @author
@@ -15,13 +15,31 @@ const Signin = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const auth = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
-  const userLogin = (e) => {
+  useEffect(() => {
+
+  }, [])
+
+  const userLogin = async (e) => {
     e.preventDefault()
     const user = { email, password }
     dispatch(login(user))
+      // .then(() => setTimeout(() => { setError('') }, 5000))
   }
+
+  if(auth.error){
+    console.log('auth: ' + auth)
+    console.log('auth.error: ' + auth.error)
+    let errorValue = String(auth.error)
+    console.log('errorValue: ' + errorValue)
+    setError(errorValue)
+    auth.error = null
+
+  }
+
+
 
   return (
     <div>
@@ -38,7 +56,8 @@ const Signin = (props) => {
               >
                 <h3>Signin</h3>
               </div>
-              {error && <span className='error-message'>{error}</span>}
+              {console.log('error: ' + error)}
+              {/* {error && <span className='error-message'>{error}</span>} */}
               <Input
                 label="Email Address"
                 placeholder="Email Address"
