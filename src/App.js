@@ -4,6 +4,7 @@ import Home from "./containers/Home"
 import Signin from "./containers/Signin"
 import Signup from "./containers/Signup"
 import ForgotPassword from "./containers/ForgotPassword"
+import ResetPassword from "./containers/ResetPassword"
 import PrivateRoute from "./components/HOC/PrivateRoute";
 import { useDispatch, useSelector } from "react-redux";
 import { isUserLoggedIn } from "./actions";
@@ -33,6 +34,7 @@ const App = (props) => {
         <Route path='/signin' component={Signin} />
         <Route path='/signup' component={Signup} />
         <Route path='/forgotpassword' component={ForgotPassword} />
+        <Route path="/passwordreset/:resetToken" component={ResetPassword} />
       </Switch>
     </div>
   )

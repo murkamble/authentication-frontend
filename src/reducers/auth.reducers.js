@@ -86,6 +86,27 @@ export default (state = initState, action) => {
                 authenticate: false,
             }
             break;
+        case authConstants.RESET_PASSWORD_REQUEST:
+            state = {
+                ...state,
+                authenticating: true,
+            }
+            break;
+        case authConstants.RESET_PASSWORD_SUCCESS:
+            state = {
+                ...state,
+                message: action.payload.message,
+                error: null,
+            }
+            break;
+        case authConstants.RESET_PASSWORD_FAILURE:
+            state = {
+                ...state,
+                error: action.payload.error,
+                message: '',
+                authenticate: false,
+            }
+            break;
     }
     return state
 }

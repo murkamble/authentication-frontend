@@ -77,3 +77,21 @@ export const forgotPassword = (email) => {
         }
     }
 }
+
+export const resetPassword = (password, match) => {
+    return async (dispatch) => {
+        dispatch({ type: authConstants.RESET_PASSWORD_REQUEST })
+        try {
+            const res = await axios.put(`/auth/resetpassword/${match.resetToken}`, { password })
+            dispatch({
+                type: authConstants.RESET_PASSWORD_SUCCESS,
+                payload: { message: res.data.data }
+            })
+        } catch (error) {
+            dispatch({
+                type: authConstants.RESET_PASSWORD_FAILURE,
+                payload: { error: error.response.data.error }
+            })
+        }
+    }
+}
