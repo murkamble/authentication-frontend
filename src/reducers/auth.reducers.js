@@ -21,6 +21,7 @@ export default (state = initState, action) => {
         case authConstants.LOGIN_REQUEST:
             state = {
                 ...state,
+                error: null,
                 authenticating: true,
             }
             break
@@ -45,6 +46,7 @@ export default (state = initState, action) => {
         case authConstants.SIGNUP_REQUEST:
             state = {
                 ...state,
+                error: null,
                 authenticating: true,
             }
             break;
@@ -68,6 +70,7 @@ export default (state = initState, action) => {
         case authConstants.SEND_EMAIL_REQUEST:
             state = {
                 ...state,
+                error: null,
                 authenticating: true,
             }
             break;
@@ -89,6 +92,7 @@ export default (state = initState, action) => {
         case authConstants.RESET_PASSWORD_REQUEST:
             state = {
                 ...state,
+                error: null,
                 authenticating: true,
             }
             break;
