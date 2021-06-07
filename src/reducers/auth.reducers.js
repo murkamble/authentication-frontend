@@ -21,7 +21,7 @@ export default (state = initState, action) => {
         case authConstants.LOGIN_REQUEST:
             state = {
                 ...state,
-                authenticating: true
+                authenticating: true,
             }
             break
         case authConstants.LOGIN_SUCCESS:
@@ -39,7 +39,31 @@ export default (state = initState, action) => {
                 ...state,
                 error: action.payload.error,
                 authenticate: false,
-                authenticating: true
+                authenticating: true,
+            }
+            break;
+        case authConstants.SIGNUP_REQUEST:
+            state = {
+                ...state,
+                authenticating: true,
+            }
+            break;
+        case authConstants.SIGNUP_SUCCESS:
+            state = {
+                ...state,
+                user: action.payload.user,
+                token: action.payload.token,
+                authenticate: true,
+                authenticating: false,
+                error: null,
+            }
+            break;
+        case authConstants.SIGNUP_FAILURE:
+            state = {
+                ...state,
+                error: action.payload.error,
+                authenticate: false,
+                authenticating: true,
             }
             break;
     }

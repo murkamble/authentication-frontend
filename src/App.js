@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Route, Switch } from "react-router-dom"
 import Home from "./containers/Home"
 import Signin from "./containers/Signin"
 import Signup from "./containers/Signup"
 import PrivateRoute from "./components/HOC/PrivateRoute";
+import { useDispatch, useSelector } from "react-redux";
+import { isUserLoggedIn } from "./actions";
 import * as bs from 'bootstrap/dist/css/bootstrap.css';
 
 /**
@@ -12,6 +14,16 @@ import * as bs from 'bootstrap/dist/css/bootstrap.css';
 **/
 
 const App = (props) => {
+
+  const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth);
+
+  useEffect(() => {
+    if (!auth.authenticate) {
+      dispatch(isUserLoggedIn());
+    }
+  }, [auth.authenticate]);
+
   return (
     <div>
       <Switch>

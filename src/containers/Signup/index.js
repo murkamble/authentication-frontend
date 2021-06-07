@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Form, Row, Col, Button } from "react-bootstrap"
 import Input from "../../components/UI/Input"
-import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { Redirect, Link } from 'react-router-dom'
+import { signup } from "../../actions"
 
 /**
 * @author
@@ -9,12 +11,49 @@ import { Link } from "react-router-dom"
 **/
 
 const Signup = (props) => {
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [dob, setDob] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [error, setError] = useState('');
+  const auth = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+  }, []);
+
+  if (auth.authenticate) {
+    return <Redirect to={'/'} />
+  }
+
+
+  const userSignup = (e) => {
+    e.preventDefault()
+    const user = { firstName, lastName, dob, email, password }
+    setTimeout(() => setError(''), 5000)
+    if(!firstName) return setError('Please, Enter First Name.')
+    if(!lastName) return setError('Please, Enter Last Name.')
+    if(!dob) return setError('Please, Enter Date of Birth.')
+    if(!email) return setError('Please, Enter Email.')
+    if(!password) return setError('Please, Enter Password.')
+    if(!confirmPassword) return setError('Please, Enter Confirm Password.')
+    if (password !== confirmPassword) {
+      setPassword('')
+      setConfirmPassword('')
+      return setError('Passwords do not match')
+    }
+    dispatch(signup(user))
+  }
+
   return (
     <div>
       <Container>
         <Row style={{ marginTop: '50px' }}>
           <Col md={{ span: 6, offset: 3 }}>
-            <Form>
+            <Form onSubmit={userSignup}>
               <div
                 style={{
                   display: 'flex',
@@ -24,24 +63,26 @@ const Signup = (props) => {
               >
                 <h3>Signup</h3>
               </div>
-              {/* {error && <span className='error-message'>{error}</span>} */}
+              {auth.error && <span style={{ color: 'red' }} className='error-message'>{auth.error}</span>}
+              <br/>
+              {error && <span style={{ color: 'red' }} className='error-message'>{error}</span>}
               <Row>
                 <Col md={6}>
                   <Input
                     label="First Name"
                     placeholder="First Name"
-                    value=""
+                    value={firstName}
                     type="text"
-                    onChange={() => { }}
+                    onChange={(e) => setFirstName(e.target.value)}
                   />
                 </Col>
                 <Col md={6}>
                   <Input
                     label="Last Name"
                     placeholder="Last Name"
-                    value=""
+                    value={lastName}
                     type="text"
-                    onChange={() => { }}
+                    onChange={(e) => setLastName(e.target.value)}
                   />
                 </Col>
 
@@ -50,33 +91,33 @@ const Signup = (props) => {
               <Input
                 label="Date Of Birth"
                 placeholder="dd-MM-yyyy"
-                value=""
+                value={dob}
                 type="text"
-                onChange={() => { }}
+                onChange={(e) => setDob(e.target.value)}
               />
 
               <Input
                 label="Email Address"
                 placeholder="Email Address"
-                value=""
+                value={email}
                 type="email"
-                onChange={() => { }}
+                onChange={(e) => setEmail(e.target.value)}
               />
 
               <Input
                 label="Password"
                 placeholder="Password"
-                value=""
+                value={password}
                 type="password"
-                onChange={() => { }}
+                onChange={(e) => setPassword(e.target.value)}
               />
 
               <Input
                 label="Confirm Password"
                 placeholder="Confirm Password"
-                value=""
+                value={confirmPassword}
                 type="password"
-                onChange={() => { }}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
               <div
                 style={{

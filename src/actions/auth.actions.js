@@ -36,3 +36,26 @@ export const isUserLoggedIn = () => {
         }
     }
 }
+
+export const signup = (user) => {
+    return async (dispatch) => {
+        dispatch({ type: authConstants.SIGNUP_REQUEST })
+        try {
+            const res = await axios.post(`/auth/signup`, { ...user })
+            if (res.status === 201) {
+                const { token, user } = res.data;
+                localStorage.setItem('authToken', token)
+                localStorage.setItem('user', JSON.stringify(user));
+                dispatch({
+                    type: authConstants.SIGNUP_SUCCESS,
+                    payload: { token, user }
+                })
+            }
+        } catch (error) {
+            dispatch({
+                type: authConstants.SIGNUP_FAILURE,
+                payload: { error: error.response.data.error }
+            })
+        }
+    }
+}
