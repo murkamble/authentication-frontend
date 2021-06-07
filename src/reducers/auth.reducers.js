@@ -10,9 +10,9 @@ const initState = {
     },
     authenticate: false,
     authenticating: false,
+    message: '',
     loading: false,
     error: null,
-    message: ''
 }
 
 export default (state = initState, action) => {
@@ -63,7 +63,27 @@ export default (state = initState, action) => {
                 ...state,
                 error: action.payload.error,
                 authenticate: false,
+            }
+            break;
+        case authConstants.SEND_EMAIL_REQUEST:
+            state = {
+                ...state,
                 authenticating: true,
+            }
+            break;
+        case authConstants.SEND_EMAIL_SUCCESS:
+            state = {
+                ...state,
+                message: action.payload.message,
+                error: null,
+            }
+            break;
+        case authConstants.SEND_EMAIL_FAILURE:
+            state = {
+                ...state,
+                error: action.payload.error,
+                message: '',
+                authenticate: false,
             }
             break;
     }

@@ -27,7 +27,7 @@ export const login = (user) => {
 export const isUserLoggedIn = () => {
     return async dispatch => {
         const token = localStorage.getItem('authToken');
-        if(token){
+        if (token) {
             const user = JSON.parse(localStorage.getItem('user'));
             dispatch({
                 type: authConstants.LOGIN_SUCCESS,
@@ -54,6 +54,24 @@ export const signup = (user) => {
         } catch (error) {
             dispatch({
                 type: authConstants.SIGNUP_FAILURE,
+                payload: { error: error.response.data.error }
+            })
+        }
+    }
+}
+
+export const forgotPassword = (email) => {
+    return async (dispatch) => {
+        dispatch({ type: authConstants.SEND_EMAIL_REQUEST })
+        try {
+            const res = await axios.post('/auth/forgotpassword', { email })
+            dispatch({
+                type: authConstants.SEND_EMAIL_SUCCESS,
+                payload: { message: res.data.data }
+            })
+        } catch (error) {
+            dispatch({
+                type: authConstants.SEND_EMAIL_FAILURE,
                 payload: { error: error.response.data.error }
             })
         }

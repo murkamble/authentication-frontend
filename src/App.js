@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom"
 import Home from "./containers/Home"
 import Signin from "./containers/Signin"
 import Signup from "./containers/Signup"
+import ForgotPassword from "./containers/ForgotPassword"
 import PrivateRoute from "./components/HOC/PrivateRoute";
 import { useDispatch, useSelector } from "react-redux";
 import { isUserLoggedIn } from "./actions";
@@ -31,6 +32,7 @@ const App = (props) => {
         
         <Route path='/signin' component={Signin} />
         <Route path='/signup' component={Signup} />
+        <Route path='/forgotpassword' component={ForgotPassword} />
       </Switch>
     </div>
   )
