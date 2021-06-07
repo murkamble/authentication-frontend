@@ -65,7 +65,7 @@ const Signin = (props) => {
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <span style={{ fontSize: '14px' }} ><Link to='/signup' >Forgot Password</Link></span>
+              <span style={{ fontSize: '14px' }} ><Link to='/forgotpassword' >Forgot Password</Link></span>
               <div
                 style={{
                   margin: '10px',
