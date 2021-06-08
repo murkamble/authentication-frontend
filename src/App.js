@@ -7,7 +7,7 @@ import ForgotPassword from "./containers/ForgotPassword"
 import ResetPassword from "./containers/ResetPassword"
 import PrivateRoute from "./components/HOC/PrivateRoute";
 import { useDispatch, useSelector } from "react-redux";
-import { isUserLoggedIn } from "./actions";
+import { isUserLoggedIn, isTokenValid } from "./actions";
 import * as bs from 'bootstrap/dist/css/bootstrap.css';
 
 /**
@@ -22,15 +22,17 @@ const App = (props) => {
 
   useEffect(() => {
     if (!auth.authenticate) {
-      dispatch(isUserLoggedIn());
+      dispatch(isUserLoggedIn())
+      dispatch(isTokenValid())
     }
-  }, [auth.authenticate]);
+  }, [auth.authenticate])
+
 
   return (
     <div>
       <Switch>
         <PrivateRoute path='/' exact component={Home} />
-        
+
         <Route path='/signin' component={Signin} />
         <Route path='/signup' component={Signup} />
         <Route path='/forgotpassword' component={ForgotPassword} />

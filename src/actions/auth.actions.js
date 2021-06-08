@@ -37,6 +37,31 @@ export const isUserLoggedIn = () => {
     }
 }
 
+export const isTokenValid = () => {
+    return async (dispatch) => {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem('authToken')}`
+            }
+        }
+        dispatch({ type: authConstants.GET_TOKEN_REQUEST })
+        try {
+            const { data } = await axios.get('/private', config)
+            dispatch({
+                type: authConstants.GET_TOKEN_SUCCESS,
+                payload: { message: data.data }
+            })
+        } catch (error) {
+            dispatch({
+                type: authConstants.GET_TOKEN_FAILURE,
+                payload: { error: 'You are not authorized please login' }
+            })
+            localStorage.removeItem('authToken')
+        }
+    }
+}
+
 export const signup = (user) => {
     return async (dispatch) => {
         dispatch({ type: authConstants.SIGNUP_REQUEST })

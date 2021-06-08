@@ -111,6 +111,28 @@ export default (state = initState, action) => {
                 authenticate: false,
             }
             break;
+        case authConstants.GET_TOKEN_REQUEST:
+            state = {
+                ...state,
+                error: null,
+            }
+            break;
+        case authConstants.GET_TOKEN_SUCCESS:
+            state = {
+                ...state,
+                message: action.payload.message,
+                error: null,
+            }
+            break;
+        case authConstants.GET_TOKEN_FAILURE:
+            state = {
+                ...state,
+                error: null,
+                message: '',
+                authenticate: false,
+                authenticating: true,
+            }
+            break;
     }
     return state
 }
