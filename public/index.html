@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="./logo.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <link rel="apple-touch-icon" href="./logo192.png" />
-    <link rel="manifest" href="./manifest.json" />
-    <title>Auth</title>
-  </head>
-  <body>
-    <div id="main"></div>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="./logo.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="apple-touch-icon" href="./logo192.png" />
+  <link rel="manifest" href="./manifest.json" />
+  <title>Authentication</title>
+</head>
+
+<body>
+  <div id="main"></div>
+  <script>
+    window.onload = async () => {
+      if ('serviceWorker' in navigator) {
+        await navigator.serviceWorker.register('sw.js')
+      }
+    }
+  </script>
+</body>
+
 </html>
