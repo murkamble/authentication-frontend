@@ -26,12 +26,20 @@ export const login = (user) => {
 
 export const isUserLoggedIn = () => {
     return async dispatch => {
-        const token = localStorage.getItem('authToken');
-        if (token) {
-            const user = JSON.parse(localStorage.getItem('user'));
+        dispatch({ type: authConstants.LOGIN_REQUEST })
+        try {
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                const user = JSON.parse(localStorage.getItem('user'));
+                dispatch({
+                    type: authConstants.LOGIN_SUCCESS,
+                    payload: { token, user }
+                })
+            }
+        } catch (error) {
             dispatch({
-                type: authConstants.LOGIN_SUCCESS,
-                payload: { token, user }
+                type: authConstants.LOGIN_FAILURE,
+                payload: { error: error.response.data.error }
             })
         }
     }
